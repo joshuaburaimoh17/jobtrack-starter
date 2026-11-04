@@ -36,11 +36,7 @@ Everything personal (your CV, your details, your applications) stays on your lap
 ## A few words you'll see
 
 - **Terminal:** a window where you type commands instead of clicking. On Windows it's called **PowerShell** (or Terminal); on a Mac it's called **Terminal**. It looks scary but you'll only type a few things.
-- **Command:** a line of text you type into the terminal and then press **Enter** to run. In this guide, commands look like this:
-  ```
-  example command
-  ```
-  Copy the command exactly, paste it into the terminal, press **Enter**.
+- **Command:** a line of text you type into the terminal and then press **Enter** to run. In this guide, commands are shown in a **dark box**. Copy the command exactly, paste it into the terminal, and press **Enter**.
 - **Pasting into a terminal:**
   - Windows: **Ctrl + V** (or right-click inside the window);
   - Mac: **Cmd + V**.
