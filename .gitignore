@@ -1,0 +1,15 @@
+# Python / tooling
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# YOUR personal stuff: never committed, never shared
+.env
+db.sqlite3
+profile.md
+cvs/*
+!cvs/README.md
+cover-letters/
+my-job-hunt/
+*.pdf

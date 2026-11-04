@@ -1,0 +1,44 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}JobTrack — CV Archive{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">CV Archive</h1>
+    <p class="mt-1 text-sm text-gray-500">Every tailored CV, filed by the month it was generated.</p>
+</div>
+
+{% if months %}
+<div class="space-y-6">
+    {% for month in months %}
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-3 border-b border-gray-200 bg-gray-50">
+            <h2 class="text-sm font-semibold text-gray-900">{{ month.name }}</h2>
+        </div>
+        <ul class="divide-y divide-gray-100">
+            {% for filename in month.files %}
+            <li class="flex items-center justify-between px-6 py-3 hover:bg-gray-50 transition-colors">
+                <span class="text-sm text-gray-700 truncate pr-4">{{ filename }}</span>
+                <a href="{% url 'tracker:download_archived_cv' month.name filename %}"
+                   class="inline-flex items-center gap-1.5 text-sm text-indigo-600 hover:text-indigo-700 font-medium shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Download
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-white rounded-lg border border-gray-200 shadow-sm px-6 py-16 text-center">
+    <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+    </svg>
+    <p class="text-gray-500 font-medium">No archived CVs yet</p>
+    <p class="mt-1 text-sm text-gray-400">Tailor a CV from a job lead and it'll show up here automatically.</p>
+</div>
+{% endif %}
+{% endblock %}

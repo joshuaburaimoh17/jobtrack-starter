@@ -1,0 +1,37 @@
+from django.urls import path
+
+from . import views
+
+app_name = 'tracker'
+
+urlpatterns = [
+    # Dashboard — served at both the root and /dashboard/
+    path('', views.dashboard, name='home'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+
+    # Analytics
+    path('analytics/', views.analytics, name='analytics'),
+
+    # Applications
+    path('applications/', views.application_list, name='application_list'),
+    path('applications/add/', views.application_add, name='application_add'),
+    path('applications/<int:pk>/', views.application_detail, name='application_detail'),
+    path('applications/<int:pk>/edit/', views.application_edit, name='application_edit'),
+    path('applications/<int:pk>/delete/', views.application_delete, name='application_delete'),
+    path('applications/<int:pk>/status/', views.update_status, name='update_status'),
+
+    # Job Queue — static routes must come before <int:pk>
+    path('queue/', views.job_queue, name='job_queue'),
+    path('queue/add/', views.add_job, name='add_job'),
+    path('queue/<int:pk>/', views.job_lead_detail, name='job_lead_detail'),
+    path('queue/<int:pk>/dismiss/', views.dismiss_lead, name='dismiss_lead'),
+    path('queue/<int:pk>/ready/', views.mark_ready, name='mark_ready'),
+    path('queue/<int:pk>/apply/', views.mark_applied, name='mark_applied'),
+    path('queue/<int:pk>/tailor/', views.tailor_cv_view, name='tailor_cv'),
+    path('queue/<int:pk>/cv/download/', views.download_cv, name='download_cv'),
+
+    # CV Archive
+    path('cvs/', views.cv_archive, name='cv_archive'),
+    path('cvs/<str:month>/<str:filename>/download/', views.download_archived_cv, name='download_archived_cv'),
+
+]

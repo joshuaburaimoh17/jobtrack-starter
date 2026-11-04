@@ -1,0 +1,123 @@
+{% extends "tracker/base.html" %}
+
+{% block title %}JobTrack — Applications{% endblock %}
+
+{% block content %}
+
+<!-- Page header -->
+<div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+        <h1 class="text-2xl font-semibold text-gray-900">Applications</h1>
+        <span class="bg-gray-100 text-gray-600 text-sm font-medium px-2.5 py-0.5 rounded-full">{{ total }}</span>
+    </div>
+    <a href="{% url 'tracker:application_add' %}"
+       class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Add Application
+    </a>
+</div>
+
+<!-- Search and filter bar -->
+<form method="get" action="{% url 'tracker:application_list' %}" class="flex flex-wrap gap-3 mb-6">
+    <div class="relative flex-1 min-w-[200px] max-w-sm">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/>
+        </svg>
+        <input type="text" name="search" value="{{ search }}" placeholder="Search role or company…"
+               class="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+    </div>
+    <select name="status"
+            class="text-sm border border-gray-300 rounded-md px-3 py-2 shadow-sm bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">All statuses</option>
+        {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if status_filter == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit"
+            class="text-sm bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-md shadow-sm hover:bg-gray-50 transition-colors">
+        Filter
+    </button>
+    {% if search or status_filter %}
+    <a href="{% url 'tracker:application_list' %}"
+       class="text-sm text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors">
+        Clear
+    </a>
+    {% endif %}
+</form>
+
+<!-- Table -->
+<div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+    <table class="w-full text-sm">
+        <thead>
+            <tr class="border-b border-gray-200 bg-gray-50">
+                <th class="text-left px-4 py-3 font-medium text-gray-600 w-[35%]">Role</th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600 w-[25%]">
+                    <a href="{% url 'tracker:application_list' %}?sort=company&search={{ search }}&status={{ status_filter }}"
+                       class="inline-flex items-center gap-1 hover:text-gray-900 {% if sort == 'company' %}text-indigo-600{% endif %}">
+                        Company
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                        </svg>
+                    </a>
+                </th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600 w-[20%]">
+                    <span class="inline-flex items-center gap-1.5">
+                        Date Applied
+                        <span class="inline-flex items-center gap-0.5 text-gray-400">
+                            <a href="{% url 'tracker:application_list' %}?sort=-date_applied&search={{ search }}&status={{ status_filter }}"
+                               title="Newest first"
+                               class="hover:text-gray-700 {% if sort == '-date_applied' %}text-indigo-600{% endif %}">↓</a>
+                            <a href="{% url 'tracker:application_list' %}?sort=date_applied&search={{ search }}&status={{ status_filter }}"
+                               title="Oldest first"
+                               class="hover:text-gray-700 {% if sort == 'date_applied' %}text-indigo-600{% endif %}">↑</a>
+                        </span>
+                    </span>
+                </th>
+                <th class="text-left px-4 py-3 font-medium text-gray-600 w-[20%]">
+                    <a href="{% url 'tracker:application_list' %}?sort=status&search={{ search }}&status={{ status_filter }}"
+                       class="inline-flex items-center gap-1 hover:text-gray-900 {% if sort == 'status' %}text-indigo-600{% endif %}">
+                        Status
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                        </svg>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for app in applications %}
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3">
+                    <a href="{% url 'tracker:application_detail' app.pk %}"
+                       class="font-medium text-gray-900 hover:text-indigo-600 transition-colors">
+                        {{ app.role }}
+                    </a>
+                </td>
+                <td class="px-4 py-3 text-gray-600">{{ app.company }}</td>
+                <td class="px-4 py-3 text-gray-600">{{ app.date_applied }}</td>
+                <td class="px-4 py-3">
+                    {% include 'tracker/_status_badge.html' with status=app.status %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="px-4 py-16 text-center">
+                    <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <p class="text-gray-500 font-medium">No applications found</p>
+                    {% if search or status_filter %}
+                        <a href="{% url 'tracker:application_list' %}" class="mt-1 inline-block text-sm text-indigo-600 hover:text-indigo-700">Clear filters</a>
+                    {% else %}
+                        <a href="{% url 'tracker:application_add' %}" class="mt-1 inline-block text-sm text-indigo-600 hover:text-indigo-700">Add your first application</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
