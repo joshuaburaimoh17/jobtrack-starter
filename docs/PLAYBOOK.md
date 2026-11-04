@@ -81,7 +81,7 @@ Why: on an early run, closed postings slipped through and wasted a whole applica
 - **Recruiter questions** ("what are your salary expectations?", "are you still interested?") get a Gmail **draft** reply for the owner to review. **Never send.**
 - When a status changes, add a dated note saying which email triggered it (`set_status --note`).
 - **Timing:** most rejections arrive **within 7 days**; about **80% within 3 weeks**. After 3 weeks of silence, treat it as a no (`tracker_status` flags these). Don't chase cold applications more than once.
-- If the Gmail connector fails (token expired), say so clearly and tell the owner to reconnect (claude.ai, then Settings, then Connectors, then `/mcp` in Claude Code). Next run, widen the sweep to cover the missed days.
+- If the Gmail connector fails (token expired), say so clearly and tell the owner to reconnect (claude.ai, then Customize, then Connectors, then Gmail; then `/mcp` in Claude Code). Next run, widen the sweep to cover the missed days.
 
 ---
 

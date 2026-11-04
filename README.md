@@ -24,11 +24,13 @@ Everything personal (your CV, profile, applications, emails) **stays on your lap
 
 ## Setup, step by step (one time only)
 
+> **New to terminals, Python or Git? Follow [`SETUP_GUIDE.md`](SETUP_GUIDE.md) instead.** It explains every click, assuming nothing. The steps below are the short version.
+
 ### 1. Get Claude Pro
 Go to **claude.ai**, sign up (or log in), and upgrade to **Pro**.
 
 ### 2. Connect your Gmail to Claude
-On claude.ai: **Settings → Connectors → Gmail → Connect**. Sign in with **the Gmail you use for job applications**, because that's where recruiters reply.
+On claude.ai: **Customize → Connectors → Gmail → Connect** (direct link: claude.ai/customize/connectors). Sign in with **the Gmail you use for job applications**, because that's where recruiters reply.
 
 ### 3. Install Python
 Download it from **python.org/downloads** and run the installer.
@@ -50,10 +52,10 @@ Paste the install command for your system (from **docs.claude.com → Claude Cod
 Close the terminal, open a new one, type `claude` and press Enter. A browser window opens. **Log in with your Claude account from step 1.** Then type `/exit` to leave Claude for now.
 
 ### 6. Download JobTrack
-In the terminal, type these one line at a time (replace the link with the one you were sent):
+In the terminal, type these one line at a time :
 ```
 cd Documents
-git clone <link-you-were-sent> jobtrack
+git clone https://github.com/joshuaburaimoh17/jobtrack-starter jobtrack
 cd jobtrack
 ```
 You now have a `jobtrack` folder inside Documents.
@@ -138,7 +140,7 @@ These are never uploaded anywhere (they're excluded from git):
 |---|---|
 | `python` is not recognised | Python isn't on PATH. Re-run the Python installer, choose *Modify*, and tick "Add to PATH". Then open a new terminal. |
 | `claude` is not recognised | Close and reopen the terminal. If it still fails, re-run the Claude Code install command. |
-| Claude can't see your Gmail | claude.ai → Settings → Connectors → Gmail: connect it (the right account!). Then type `/mcp` in Claude Code, and restart `claude`. |
+| Claude can't see your Gmail | claude.ai → Customize → Connectors → Gmail: connect it (the right account!). Then type `/mcp` in Claude Code, and restart `claude`. |
 | Website won't load | Ask Claude to "start the app", then go to http://127.0.0.1:8000. |
 | Forgot your website password | Ask Claude: "reset my JobTrack password". |
 | CV tailoring says it can't find a heading | Your CV changed, or uses tables/text boxes. Tell Claude "I updated my base CV". |

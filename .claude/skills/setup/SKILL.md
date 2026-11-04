@@ -71,7 +71,7 @@ Write `profile.md`: the human sections in full, plus the yaml block with `name`,
 Run a small Gmail search with the Gmail connector tool (`search_threads`, e.g. query `newer_than:2d`, a few results).
 - **It works:** confirm the mailbox is the application email from their profile. If it's a different account, they need to switch it (below).
 - **No Gmail tool, or an auth error:** explain:
-  > Go to **claude.ai**, then **Settings**, then **Connectors**, then **Gmail**, then **Connect**, and sign in with the Gmail you use for job applications. Then come back here, type `/mcp`, and authenticate Gmail if it's listed as needing it. Restart `claude` if it still doesn't show.
+  > Go to **claude.ai/customize/connectors** (claude.ai, then **Customize**, then **Connectors**), click **Gmail**, then **Connect**, and sign in with the Gmail you use for job applications. Then come back here, type `/mcp`, and authenticate Gmail if it's listed as needing it. Restart `claude` if it still doesn't show.
 
   Then test again. If it still fails, carry on; everything else works without Gmail, and `/job-search` will just skip the inbox step until it's fixed.
 
