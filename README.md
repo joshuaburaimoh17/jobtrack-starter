@@ -1,5 +1,7 @@
 # JobTrack
 
+> A job-search toolkit I built for my classmates after landing my graduate role. I used the original version through my own graduate job hunt in 2026. This is a cleaned-up copy that anyone can set up and make their own.
+
 **Your own job-search assistant.** It's a small website on your laptop that tracks every job you find and apply to, plus Claude, which does the legwork. Claude:
 - **finds** graduate/junior jobs that fit you, and checks each one is still open;
 - **tailors your CV** for each job, keeping your CV's formatting;
@@ -8,7 +10,7 @@
 - **preps you** for interviews: mock interviews, cheat sheets, a STAR story bank;
 - **shows you** what's working: response rates, analytics, a goal tracker.
 
-It was built for (and used through) a real 2026 graduate job hunt that ended in an offer. Everything learned along the way is in [`docs/PLAYBOOK.md`](docs/PLAYBOOK.md). Everything it can do is in [`docs/FEATURES.md`](docs/FEATURES.md).
+Everything learned along the way is in [`docs/PLAYBOOK.md`](docs/PLAYBOOK.md). Everything it can do is in [`docs/FEATURES.md`](docs/FEATURES.md).
 
 Everything personal (your CV, profile, applications, emails) **stays on your laptop**. None of it is ever uploaded.
 
